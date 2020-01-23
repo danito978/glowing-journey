@@ -46,7 +46,7 @@ if (tkn !== "undefined"){
 }
 if (tkn === ""){
     //$('#log').append('<a href=""><img src="img/login.png"></a>');
-    $('#log').append("<a style=\"display:block;margin:auto;text-align:center;\" href=\"https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=v8jjvzxpx7byti5lykiyy5001gueh4&redirect_uri=http://unfollowers.tv/unfollow.php&scope=analytics:read:extensions\"><img height=\"35\" src=\"img/login.png\"></a>")
+    $('#log').append("<a style=\"display:block;margin:auto;text-align:center;\" href=\"https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=v8jjvzxpx7byti5lykiyy5001gueh4&redirect_uri=http://unfollowers.c1.biz/home.php/unfollow.php&scope=analytics:read:extensions\"><img height=\"35\" src=\"img/login.png\"></a>")
 }
 
 

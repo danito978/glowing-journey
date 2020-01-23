@@ -14,7 +14,7 @@ var getUrlParameter = function getUrlParameter(sParam) {
     }
 };
 // GLOBAL VARIABLE 
-var link = getUrlParameter("offset");
+var cursor = getUrlParameter("cursor");
 var userName = getUrlParameter("user");
 var token = getUrlParameter("fragmentaccess_token")
 var thisUrl = window.location.pathname;
@@ -27,43 +27,185 @@ let urlUserName = "https://api.twitch.tv/helix/users";
 
 //form action
 
+if (cursor === undefined) {
+    // GETTING THE USER ID FROM FRAGMENT ACCESS TOKEN OR BEARER TOKEN
+    $.ajax({
+        url: urlUserName,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+        }, success: function (data) {
 
-// GETTING THE USER ID FROM FRAGMENT ACCESS TOKEN OR BEARER TOKEN
-$.ajax({
-    url: urlUserName,
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-    }, success: function (data) {
-        
-        //console.log(data);
-        $.each(data, function (a, b) {
-            $.each(b, function (b1, b2) {
-                console.log(b2.id); // <--- This is users ID
-                var urlUserFollows = "https://api.twitch.tv/helix/users/follows?from_id=" + b2.id;               
+            //console.log(data);
+            $.each(data, function (a, b) {
+                $.each(b, function (b1, b2) {
+                    console.log(b2.id); // <--- This is users ID
+                    var urlUserFollows = "https://api.twitch.tv/helix/users/follows?from_id=" + b2.id;
+                    var urlFollowingUser = "https://api.twitch.tv/helix/users/follows?to_id=" + b2.id;
+
+
+
+
+                    // GETTING USERS FOLLOWED CHANNELS
+                    $.ajax({
+                        url: urlUserFollows,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+                        }, success: function (data) {
+                            //console.log(data);
+                            $.each(data, function (c, d) {
+                                //MAKE PAGINATION POSSIBLE
+                                console.log(d.cursor); // FOR NEXT PAGE
+                                document.getElementById("next").addEventListener("click", nextPage, false);
+                                function nextPage() {
+
+                                    window.location = thisUrl + '?fragmentaccess_token=' + token + '&scope=analytics%3Aread%3Aextensions&token_type=bearer' + '&cursor=' + d.cursor;
+                                }
+                                $.each(d, function (c1, d1) {                                    
+                                    $('#fccStatus').append('<p>' + '<span class="' + d1.to_name + '">' + d1.to_name + '</span>' + '</p>'); // APPENDS USERS WHO USER FOLLOWED
+                                    
+                                    // THIS RIGHT HERE IS TO CHECK IF THE GUY THE USER FOLLOWS, FOLLOWS HIM BACK
+                                    $.ajax({
+                                        url: 'https://api.twitch.tv/helix/users/follows?from_id=' + d1.to_id + '&to_id=' + b2.id,
+                                        beforeSend: function (xhr) {
+                                            xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+                                        }, success: function (data) {
+                                            
+                                            console.log(data)
+                                            if(data.total === 0){
+                                               $('#links').append('<p>' + '<span class="' + d1.to_name + '">' + d1.to_name + '</span>' + ' doesn\'t follow you!</p>');
+                                            }
+                                            else{
+                                                $('#links').append('<p>' + '<span class="' + d1.to_name + '">' + d1.to_name + '</span>' + ' follows you!</p>');
+                                            }
+                                            
+                                        }
+                                    });
+                                    // TO HERE ^
+                                    
+                                });
+                            });
+                        }
+                    });
+                    /*
+                    // GETTING FOLLOWERS OF USER
+                    $.ajax({
+                        url: urlFollowingUser,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+                        }, success: function (data) {
+                            //console.log(data);
+                            $.each(data, function (c, d) {
+                                console.log(d);
+                                $.each(d, function (c1, d1) {
+                                    $('#links').append('<p>' + d1.from_name + '</p>'); // APPENDS USERS WHO USER FOLLOWED
+                                });
+                            });
+                        }
+                    });
+                    */
+                });
             });
-        });
-        
-    }
-});
+        }
+    });
+    
+    
+    
+} else {
+    // GETTING THE USER ID FROM FRAGMENT ACCESS TOKEN OR BEARER TOKEN
+    $.ajax({
+        url: urlUserName,
+        beforeSend: function (xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+        }, success: function (data) {
 
+            //console.log(data);
+            $.each(data, function (a, b) {
+                $.each(b, function (b1, b2) {
+                    console.log(b2.id); // <--- This is users ID
+                    var urlUserFollowsNext = "https://api.twitch.tv/helix/users/follows?from_id=" + b2.id + '&after=' + cursor;
+                    var urlFollowingUserNext = "https://api.twitch.tv/helix/users/follows?to_id=" + b2.id + '&after=' + cursor;
+                    // GETTING USERS FOLLOWED CHANNELS
+                    $.ajax({
+                        url: urlUserFollowsNext,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+                        }, success: function (data) {
+                            //console.log(data);
+                            $.each(data, function (c, d) {
+                                console.log(d);
+                                //MAKE PAGINATION POSSIBLE
+                                console.log(d.cursor); // FOR NEXT PAGE
+                                document.getElementById("next").addEventListener("click", nextPage, false);
+                                function nextPage() {
 
-                // GETTING USERS FOLLOWED CHANNELS
-$.ajax({
-    url: urlUserFollows,
-    beforeSend: function (xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + token)
-    }, success: function (data) {
-        //console.log(data);
-        $.each(data, function (c, d) {
-            $.each(b, function (c1, d2) {
-                console.log(d2); // <--- This is users ID
+                                    window.location = thisUrl + '?fragmentaccess_token=' + token + '&scope=analytics%3Aread%3Aextensions&token_type=bearer' + '&cursor=' + d.cursor;
+                                }
+                                $.each(d, function (c1, d1) {
+                                    $('#fccStatus').append('<p>' + '<span class="' + d1.to_name + '">' + d1.to_name + '</span>' + '</p>'); // APPENDS USERS WHO USER FOLLOWED
+                                    
+                                    
+                                    // THIS RIGHT HERE IS TO CHECK IF THE GUY THE USER FOLLOWS, FOLLOWS HIM BACK
+                                    $.ajax({
+                                        url: 'https://api.twitch.tv/helix/users/follows?from_id=' + d1.to_id + '&to_id=' + b2.id,
+                                        beforeSend: function (xhr) {
+                                            xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+                                        }, success: function (data) {
+                                            if(data.total === 0){
+                                               $('#links').append('<p>' + '<span class="' + d1.to_name + '">' + d1.to_name + '</span>' +  ' doesn\'t follow you!</p>');
+                                            }
+                                            else{
+                                                $('#links').append('<p>' + '<span class="' + d1.to_name + '">' + d1.to_name + '</span>' + ' follows you!</p>');
+                                            }
+                                            
+                                        }
+                                    });
+                                    // TO HERE ^
+
+                                    
+                                    
+                                });
+                            });
+                        }
+                    });
+                    
+                    
+                   /*
+                    // GETTING FOLLOWERS OF USER
+                    $.ajax({
+                        url: urlFollowingUserNext,
+                        beforeSend: function (xhr) {
+                            xhr.setRequestHeader('Authorization', 'Bearer ' + token)
+                        }, success: function (data) {
+                            //console.log(data);
+                            $.each(data, function (c, d) {
+                                console.log(d);
+                                $.each(d, function (c1, d1) {
+                                    $('#links').append('<p>' + d1.from_name + '</p>'); // APPENDS USERS WHO USER FOLLOWED
+                                });
+                            });
+                        }
+                    });
+                    */  
+                    
+                });
             });
-        });
-        //process the JSON data etc
-    }
-});
-  
+        }
+    });
+}
 
+
+
+
+$(document).ready(function() {
+    $("span").mouseover(function() {
+// find matching ids || text || classes .. e.t.c.
+$("span."+$(this).attr("class")).css("color","grey");
+});
+$("span").mouseleave(function() {
+// find matching ids || text || classes .. e.t.c.
+$("span."+$(this).attr("class")).css("color","white");
+});
+});
     
  
 /*

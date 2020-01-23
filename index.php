@@ -39,16 +39,16 @@ and open the template in the editor.
     <body   style="">
 
         <h1 style="text-align: center;">Connect with Twitch to continue</h1>
-            <!--  <a id="hidden" style="display:block;margin:auto;text-align:center;" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=40pbvj5imeg5ma36gla9p8ryfkyyyb&redirect_uri=http://localhost/TwitchPHP/home.php&scope=analytics:read:extensions"><img height="35" src="img/login.png"></a>
+            <!--  <a id="hidden" style="display:block;margin:auto;text-align:center;" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=40pbvj5imeg5ma36gla9p8ryfkyyyb&redirect_uri=http://unfollowers.c1.biz/home.php&scope=analytics:read:extensions"><img height="35" src="img/login.png"></a>
         -->
 
-        <a id="hidden" style="display:block;margin:auto;text-align:center;" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=40pbvj5imeg5ma36gla9p8ryfkyyyb&redirect_uri=http://localhost/TwitchPHP/home.php&scope=analytics:read:extensions"><img height="35"  class="logme"  src="img/login.png"></a>
+        <a id="hidden" style="display:block;margin:auto;text-align:center;" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=40pbvj5imeg5ma36gla9p8ryfkyyyb&redirect_uri=http://unfollowers.c1.biz/home.php&scope=analytics:read:extensions"><img height="35"  class="logme"  src="img/login.png"></a>
         <br>
         <div style="background-color:#33333357;border-radius: .25rem;" class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h4 style="text-align:center;" style="color:white;">Welcome to Unfollowers.tv</h4>
-                    <p style="text-align:center;color:white;">Here you can easily track unfollowers & get a live feed of your chat and viewers!</p>
+                    <h4 style="text-align:center;" style="color:white;">Welcome to Unfollowers.c1.biz</h4>
+                    <p style="text-align:center;color:white;">Unfollowers.tv is currently offline since i cannot afford to keep it live, but you can enjoy this new domain :)<br>Here you can easily track unfollowers & get a live feed of your chat and viewers!</p>
                 </div>
             </div>
         </div>

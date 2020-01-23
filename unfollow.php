@@ -18,8 +18,8 @@ session_start();
 <?php
 ob_start();
 ini_set('max_execution_time', 300);
-// ini_set('error_reporting',0);
-$connection = mysqli_connect("localhost", "root", "", "twitchun");
+ini_set('error_reporting',0);
+$connection = mysqli_connect("pdb33.biz.nf", "2293248_tv", "718293Danito978Baychev!", "2293248_tv");
 //print_r($_GET);
 // echo $_GET['fragmentaccess_token'];
 // exit;
@@ -149,9 +149,7 @@ if ($result->num_rows <= 0) {
                 <a href="register.php" onclick="page(this);" class="active">Unfollower</a>
                 <a href="home.php" onclick="page(this);">Home</a>
                 <a href="f4f.php" onclick="page(this);">F4F Tool</a>
-                <a href="regchatters.php" onclick="page(this);">Viewers</a>
-                <a href="links.php" onclick="page(this);">Useful Links</a>
-                <a href="about.php" onclick="page(this);">About</a>
+                <a href="about.php" onclick="page(this);">FAQ'S</a>
                 <a id="hidden" style="display:block;margin:auto;text-align:center;" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=v8jjvzxpx7byti5lykiyy5001gueh4&redirect_uri=http://unfollowers.tv/home.php&scope=analytics:read:extensions"><img height="25" class="logme"  src="img/login.png"></a>
 
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
@@ -207,7 +205,8 @@ if ($result->num_rows <= 0) {
 //echo $rid;
                     $rapi = $rname . 'api';
 //echo $rapi;
-                    $connection = mysqli_connect("localhost", "root", "", "twitchun");
+                  //  $connection = mysqli_connect("localhost", "root", "", "twitchun");
+                    $connection = mysqli_connect("pdb33.biz.nf", "2293248_tv", "718293Danito978Baychev!", "2293248_tv");
                     if ($connection->query('SELECT * from ' . $rname . ' limit 1') === FALSE) {
                         $createT = 'CREATE TABLE ' . $rname . ' (
 id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

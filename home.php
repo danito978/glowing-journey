@@ -76,10 +76,8 @@ and open the template in the editor.
             <div class="topnav" id="myTopnav">
                 <a href="home.php" onclick="page(this);" class="active">Home</a>
                 <a href="f4f.php" onclick="page(this);">F4F Tool</a>
-                <a href="register.php" onclick="page(this);">Unfollower</a>
-                <a href="regchatters.php" onclick="page(this);">Viewers</a>
-                <a href="links.php" onclick="page(this);">Useful Links</a>
-                <a href="about.php" onclick="page(this);">About</a>
+                <a href="register.php" onclick="page(this);">Unfollower</a> 
+                <a href="about.php" onclick="page(this);">FAQ'S</a>
                 <!-- PAGE(THIS)is located in login js ..  -->
                 <a id="hidden" style="display:block;margin:auto;text-align:center;" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=v8jjvzxpx7byti5lykiyy5001gueh4&redirect_uri=http://unfollowers.tv/home.php&scope=analytics:read:extensions"><img height="25"  class="logme"  src="img/login.png"></a>
 

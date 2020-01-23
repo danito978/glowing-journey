@@ -1,5 +1,5 @@
 <?php
-$con = mysqli_connect("localhost", "root", "", "twitchun");
+$con = mysqli_connect("pdb33.biz.nf", "2293248_tv", "718293Danito978Baychev!", "2293248_tv");
 // echo "here";
 // print_r($_SESSION);
 // exit;
@@ -79,8 +79,7 @@ $con = mysqli_connect("localhost", "root", "", "twitchun");
                 <a href="register.php" onclick="page(this);" class="active">Unfollower</a>
                 <a href="home.php" onclick="page(this);">Home</a>
                 <a href="f4f.php" onclick="page(this);">F4F Tool</a>
-                <a href="regchatters.php" onclick="page(this);">Viewers</a>
-                <a href="about.php" onclick="page(this);">About</a>
+                <a href="about.php" onclick="page(this);">FAQ'S</a>
                 <a id="hidden" style="display:block;margin:auto;text-align:center;" href="https://id.twitch.tv/oauth2/authorize?response_type=token&client_id=v8jjvzxpx7byti5lykiyy5001gueh4&redirect_uri=http://unfollowers.tv/home.php&scope=analytics:read:extensions"><img height="25"  class="logme"  src="img/login.png"></a>
 
                 <a href="javascript:void(0);" class="icon" onclick="myFunction()">
